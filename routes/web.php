@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Routes for User
+Route::resource('users','App\Http\Controllers\UserController');
+Route::get('users/verify/{token}', [App\Http\Controllers\UserController::class, 'verify'])->name('verify');
+Route::get('users/{user}/resend', [App\Http\Controllers\UserController::class, 'resend'])->name('resend');
+
+//Routes for User
+
