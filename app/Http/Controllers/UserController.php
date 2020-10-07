@@ -53,7 +53,7 @@ class UserController extends Controller
      public function edit(User $user)
     {
 
-        return view('users.edit')->with('user', $user);
+        return view('users.edit', compact('user'));
     }
 
     //Update the specified user information.
