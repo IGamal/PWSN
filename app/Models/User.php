@@ -66,15 +66,21 @@ class User extends Authenticatable
         return str_random(40);
     }
 
+    //The Relation With Category Model.
+    public function categories()
+    {
+        $this->hasMany('App\Models\Category');
+    }
+
     //The Relation With Article Model.
     public function articles()
     {
         $this->hasMany('App\Models\Article');
     }
 
-    //The Relation With Category Model.
-    public function categories()
+    //The Relation With Donation Model.
+    public function donations()
     {
-        $this->hasMany('App\Models\Category');
+        $this->hasMany('App\Models\Donation');
     }
 }

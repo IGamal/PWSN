@@ -47,10 +47,13 @@
             {!! Form::label('category_id', 'Category', ['class' => 'control-label']) !!}
             {{-- Check if the field has any errors --}}
             @if($errors->has('category_id')) <p class="alert alert-danger">{{$errors->first('category_id') }}</p> @endif
-            <select name="category_id[]" class ='form-textarea' placeholder ="Change your Category" multiple>
+            <select name="category_id[]" class ='form-textarea' placeholder ="Choose one or more Category" multiple>
                 @foreach($categories as $category)
                     <option value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
+        </div>
+
+        <div>
             {{Form::submit('Add Article', ['class' => 'btn btn-primary'])}}
         </div>
     {!! Form::close() !!}

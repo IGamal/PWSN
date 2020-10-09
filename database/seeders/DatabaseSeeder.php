@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Donation;
+use App\Models\Governorate;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,20 +23,33 @@ class DatabaseSeeder extends Seeder
 
         User::truncate();
         Category::truncate();
+        Governorate::truncate();
         Article::truncate();
+        Donation::truncate();
         DB::table('article_category')->truncate();
+        DB::table('category_donation')->truncate();
 
         User::flushEventListeners();
         Category::flushEventListeners();
+        Governorate::flushEventListeners();
         Article::flushEventListeners();
+        Donation::flushEventListeners();
 
          User::factory(50)->create();
          Category::factory(15)->create();
+         //Governorate::factory(26)->create();
+         $this->call(GovernorateSeeder::class);
          Article::factory(30)->create()->each(
              function($article)
              {
                  $categories = Category::all()->random(mt_rand(1,5))->pluck('id');
                  $article->categories()->attach($categories);
              });
+        Donation::factory(30)->create()->each(
+            function($donation)
+            {
+                $categories = Category::all()->random(mt_rand(1,5))->pluck('id');
+                $donation->categories()->attach($categories);
+            });
     }
 }

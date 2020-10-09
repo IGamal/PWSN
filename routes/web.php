@@ -30,3 +30,6 @@ Route::resource('categories','App\Http\Controllers\CategoryController')->except(
 //Routes for Article.
 Route::resource('articles','App\Http\Controllers\ArticleController');
 
+//Routes for Donation.
+Route::resource('donations','App\Http\Controllers\DonationController');
+

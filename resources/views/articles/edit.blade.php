@@ -23,7 +23,7 @@
             @if($article->image) <img src="/images/{{$article->image}}"> @endif {{-- check if that article has an image --}}
             {{-- Check if the field has any errors --}}
             @if($errors->has('image')) <div class="alert alert-danger">{{$errors->first('image') }}</div> @endif
-            <input type="file" class="photo" name="image" > <p class="p3"> Change the Photo....</p>
+            <input type="file" class="photo" name="image" > <p class="p3"> Change the Image....</p>
         </div>
 
         {{-- Body Field --}}
@@ -31,7 +31,7 @@
             {{Form::label('body', 'Body')}}
             {{-- Check if the field has any errors --}}
             @if($errors->has('body')) <div class="alert alert-danger">{{$errors->first('body') }}</div> @endif
-            {{Form::textarea('body', $article->body, ['class' => 'form-input', 'placeholder' => 'Type Todo Date'])}}
+            {{Form::textarea('body', $article->body, ['class' => 'form-input', 'placeholder' => '&nbsp;Add Text.....'])}}
         </div>
 
         {{-- Video Field --}}

@@ -31,10 +31,7 @@ class ArticleFactory extends Factory
             'body' => $this->faker->paragraph(1),
             'image' => $this->faker->imageUrl($width = 640, $height = 480, 'abstract'),
             'approved' => $approved = $this->faker->randomElement([Article::Aprroved, Article::UnApproved]),
-            'user_id' => function()
-            {
-                return User::all()->random()->id;
-            }
+            'user_id' => function() { return User::all()->random()->id; }
         ];
     }
 }

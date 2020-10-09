@@ -24,4 +24,10 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Models\Article');
     }
+
+    //The Relation With Donation Model
+    public function donations()
+    {
+        return $this->belongsToMany('App\Models\Donation');
+    }
 }
