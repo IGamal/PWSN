@@ -18,7 +18,7 @@ class ArticleController extends Controller
         return view('articles.index', compact('articles'));
     }
 
-    //Show the form for creating a new article.
+    //Show the form for creating a new Article.
     public function create()
     {
         $categories = Category::all();  //get all Categories
@@ -26,7 +26,7 @@ class ArticleController extends Controller
         return view('articles.create', compact('categories'));
     }
 
-    //Store a newly created new article.
+    //Store a newly created Article in storage.
     public function store(ArticleRequest $request)
     {
         $input = $request->all();
@@ -58,13 +58,13 @@ class ArticleController extends Controller
         return view('articles.show')->with('article', $article);
     }
 
-    //Display the specified article.
+    //Display the specified Article.
     public function show(Article $article)
     {
         return view('articles.show')->with('article', $article);
     }
 
-    //Show the form for editing article.
+    //Show the form for editing Article.
     public function edit(Article $article)
     {
         $categories = Category::all();  //get all Categories
@@ -72,7 +72,7 @@ class ArticleController extends Controller
         return view('articles.edit', compact('article', 'categories'));
     }
 
-    //Update the specified article.
+    //Update the specified Article.
     public function update(Request $request, Article $article)
     {
 
@@ -114,7 +114,7 @@ class ArticleController extends Controller
         return view('articles.show')->with('article', $article);
     }
 
-    // Remove the specified article from storage.
+    // Remove the specified Article from storage.
     public function destroy(Article $article)
     {
         $article->delete();

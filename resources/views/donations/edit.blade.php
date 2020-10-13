@@ -6,7 +6,7 @@
 @section('content')
     <h1>Edit Donation</h1>
 
-    {{-- Edit Article form  --}}
+    {{-- Edit Donation form  --}}
     {!! Form::model($donation, ['method' => 'PATCH', "action" => ['App\Http\Controllers\DonationController@update', $donation->slug], 'files' => 'true']) !!}
 
     {{-- Title Field --}}

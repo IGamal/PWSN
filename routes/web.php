@@ -33,3 +33,6 @@ Route::resource('articles','App\Http\Controllers\ArticleController');
 //Routes for Donation.
 Route::resource('donations','App\Http\Controllers\DonationController');
 
+//Routes for Donation.
+Route::resource('jobs','App\Http\Controllers\JobController');
+

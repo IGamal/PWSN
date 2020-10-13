@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DonationController extends Controller
 {
-    //Display Articles home.
+    //Display Donations home.
     public function index()
     {
         $donations = Donation::all();
@@ -28,7 +28,7 @@ class DonationController extends Controller
         return view('donations.create', compact( 'governorates','categories'));
     }
 
-    //Store a newly created donation in storage.
+    //Store a newly created Donation in storage.
     public function store(DonationRequest $request)
     {
         $input = $request->all();
@@ -46,18 +46,18 @@ class DonationController extends Controller
 
         $donation = Donation::create($input);
 
-        $donation->categories()->syncWithoutDetaching($request->category_id); //Add Article and Categories ID's In Article_Category Table
+        $donation->categories()->syncWithoutDetaching($request->category_id); //Add Donation and Categories ID's In Category_Donation Table
 
         return view('donations.show', compact('donation'));
     }
 
-    //Display the specified donation.
+    //Display the specified Donation.
     public function show(Donation $donation)
     {
         return view('donations.show', compact('donation'));
     }
 
-    //Show the form for editing the specified donation.
+    //Show the form for editing the specified Donation.
     public function edit(Donation $donation)
     {
         $governorates = Governorate::pluck('name', 'id')->all();
@@ -66,7 +66,7 @@ class DonationController extends Controller
         return view('donations.edit', compact( 'donation', 'governorates','categories'));
     }
 
-    //Update the specified donation in storage.
+    //Update the specified Donation in storage.
     public function update(Request $request, Donation $donation)
     {
         $rules =
@@ -94,13 +94,13 @@ class DonationController extends Controller
 
         if($request->category_id)
         {
-            $donation->categories()->sync($request->category_id); //Add Article and Categories ID's In Article_Category Table
+            $donation->categories()->sync($request->category_id); //Add Donation and Categories ID's In Category_Donation Table
         }
 
         return view('donations.show', compact('donation'));
     }
 
-    //Remove the specified donation from storage.
+    //Remove the specified Donation from storage.
     public function destroy(Donation $donation)
     {
         $donation->delete();

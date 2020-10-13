@@ -17,9 +17,9 @@ class Donation extends Model
     {
         parent::boot();
 
-        static::creating(function($article)
+        static::creating(function($donation)
         {
-            $article->slug = str_slug($article->title);
+            $donation->slug = str_slug($donation->title);
         });
     }
 

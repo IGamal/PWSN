@@ -6,7 +6,7 @@
 @section('content')
     <h1>Add Donation</h1>
 
-    {{-- Create New Article form  --}}
+    {{-- Create New Donation form  --}}
     {!! Form::open(['action' => 'App\Http\Controllers\DonationController@store', 'method' => 'POST', 'files' => 'true']) !!}
 
     {{-- Title Field --}}
