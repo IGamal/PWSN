@@ -14,7 +14,7 @@
             {{Form::label('title', 'Title')}}
             {{-- Check if the field has any errors --}}
             @if($errors->has('title')) <div class="alert alert-danger">{{$errors->first('title') }}</div> @endif
-            {{Form::text('title', '', ['class' => 'form-input', 'placeholder' => 'Type your the Title here...'])}}
+            {{Form::text('title', '', ['class' => 'form-input', 'placeholder' => 'Type the Title here...'])}}
         </div>
 
         {{-- Image Field --}}

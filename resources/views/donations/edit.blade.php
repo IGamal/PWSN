@@ -70,7 +70,7 @@
     </div>
     {!! Form::close() !!}
 
-    {{-- Delete Article form  --}}
+    {{-- Delete Donation form  --}}
     {!! Form::model($donation, ['method' => 'DELETE', "action" => ['App\Http\Controllers\DonationController@destroy',
                     $donation->slug], 'onsubmit' => 'return confirm("Are You sure You Want To Delete This Donation")']) !!}
     <div>

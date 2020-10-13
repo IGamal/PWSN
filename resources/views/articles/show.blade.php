@@ -6,7 +6,7 @@
 @section('content')
     <h1>{{$article->title}}</h1>
     @if (auth()->id() === $article->user_id) {{-- check for user who created that article --}}
-        <a class="btn btn-primary" href="/articles/{{$article->slug}}/edit">Edit</a>
+    <a class="btn btn-primary" href="/articles/{{$article->slug}}/edit">Edit</a>
     @endif
 
     @if($article->image) <img src="/images/{{$article->image}}"> @endif {{-- check if that article has an image --}}
@@ -24,5 +24,4 @@
             <span>{{$category->name}}</span>
         @endforeach
     </div>
-
 @endsection

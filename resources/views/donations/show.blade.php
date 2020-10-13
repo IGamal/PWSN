@@ -6,7 +6,7 @@
 @section('content')
     <h1>{{$donation->title}}</h1>
 
-    @if (auth()->id() === $donation->user_id) {{-- check for user who created that article --}}
+    @if (auth()->id() === $donation->user_id) {{-- check for user who created that donation --}}
     <a class="btn btn-primary" href="/donations/{{$donation->slug}}/edit">Edit</a>
     @endif
 

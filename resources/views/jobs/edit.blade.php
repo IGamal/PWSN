@@ -77,7 +77,7 @@
         </div>
     {!! Form::close() !!}
 
-    {{-- Delete Article form  --}}
+    {{-- Delete Job form  --}}
     {!! Form::model($job, ['method' => 'DELETE', "action" => ['App\Http\Controllers\JobController@destroy',
                     $job->slug], 'onsubmit' => 'return confirm("Are You sure You Want To Delete This Job")']) !!}
         <div>

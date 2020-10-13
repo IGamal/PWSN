@@ -5,7 +5,7 @@
 
 @section('content')
     <h1>{{$job->title}}</h1>
-    @if (auth()->id() === $job->user_id) {{-- check for user who created that article --}}
+    @if (auth()->id() === $job->user_id) {{-- check for user who created that job --}}
         <a class="btn btn-primary" href="/jobs/{{$job->slug}}/edit">Edit</a>
     @endif
 

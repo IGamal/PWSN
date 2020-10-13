@@ -89,4 +89,10 @@ class User extends Authenticatable
     {
         $this->hasMany('App\Models\Job');
     }
+
+    //The Relation With News Model.
+    public function News()
+    {
+        $this->hasMany('App\Models\News');
+    }
 }
