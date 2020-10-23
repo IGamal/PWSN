@@ -39,3 +39,8 @@ Route::resource('jobs','App\Http\Controllers\JobController');
 //Routes for News.
 Route::resource('news','App\Http\Controllers\NewsController');
 
+//Routes for Education.
+Route::resource('educations','App\Http\Controllers\EducationController');
+Route::get('education/videos', [App\Http\Controllers\EducationController::class, 'videos'])->name('videos');
+Route::get('education/books', [App\Http\Controllers\EducationController::class, 'books'])->name('books');
+

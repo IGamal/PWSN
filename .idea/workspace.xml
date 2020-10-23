@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8b4f853a-9269-43bc-a5ad-c645ec3ec693" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/donations/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/donations/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/donations/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/donations/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/jobs/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobs/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/jobs/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobs/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -158,7 +154,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowHierarchy.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/news" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/educations" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
@@ -167,11 +163,11 @@
       <recent name="C:\Users\Zeus 01\Desktop\PWSN\resources\views\auth" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Zeus 01\Desktop\PWSN\resources\views\educations" />
       <recent name="C:\Users\Zeus 01\Desktop\PWSN\resources\views\news" />
       <recent name="C:\Users\Zeus 01\Desktop\PWSN\resources\views\jobs" />
       <recent name="C:\Users\Zeus 01\Desktop\PWSN\resources\pictures" />
       <recent name="C:\Users\Zeus 01\Desktop\PWSN\resources\views" />
-      <recent name="C:\Users\Zeus 01\Desktop\PWSN\resources\views\layouts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -205,6 +201,7 @@
       <workItem from="1601240725487" duration="24757000" />
       <workItem from="1601477631868" duration="997000" />
       <workItem from="1601478709619" duration="13765000" />
+      <workItem from="1602630644504" duration="12489000" />
     </task>
     <servers />
   </component>

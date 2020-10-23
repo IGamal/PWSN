@@ -91,8 +91,14 @@ class User extends Authenticatable
     }
 
     //The Relation With News Model.
-    public function News()
+    public function news()
     {
         $this->hasMany('App\Models\News');
+    }
+
+    //The Relation With Education Model.
+    public function education()
+    {
+        $this->hasMany('App\Models\Education');
     }
 }

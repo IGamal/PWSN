@@ -97,7 +97,7 @@ class NewsController extends Controller
         //check if user add video or not
         if ($file = $request->file('video'))
         {
-            $name = time() . '_' . rand(0, 1000) . '.' . $file->getClientOriginalExtension() ; //rename the image
+            $name = time() . '_' . rand(0, 1000) . '.' . $file->getClientOriginalExtension() ; //rename the video
             $file->move('videos', $name); //Move the uploaded video to the videos directory
 
             $input['video'] = $name;

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Donation;
+use App\Models\Education;
 use App\Models\Governorate;
 use App\Models\Job;
 use App\Models\News;
@@ -30,10 +31,12 @@ class DatabaseSeeder extends Seeder
         Donation::truncate();
         Job::truncate();
         News::truncate();
+        Education::truncate();
         DB::table('article_category')->truncate();
         DB::table('category_donation')->truncate();
         DB::table('category_job')->truncate();
         DB::table('category_news')->truncate();
+        DB::table('category_education')->truncate();
 
 
         User::flushEventListeners();
@@ -43,6 +46,7 @@ class DatabaseSeeder extends Seeder
         Donation::flushEventListeners();
         Job::flushEventListeners();
         News::flushEventListeners();
+        Education::flushEventListeners();
 
          User::factory(50)->create();
 
@@ -72,6 +76,12 @@ class DatabaseSeeder extends Seeder
             {
                 $categories = Category::all()->random(mt_rand(1,5))->pluck('id');
                 $news->categories()->attach($categories);
+            });
+        Education::factory(25)->create()->each(
+            function($education)
+            {
+                $categories = Category::all()->random(mt_rand(1,5))->pluck('id');
+                $education->categories()->attach($categories);
             });
     }
 }
