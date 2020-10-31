@@ -66,39 +66,56 @@ class User extends Authenticatable
         return str_random(40);
     }
 
+    public function fullName()
+    {
+        return $this->first_name .' '. $this->last_name;
+    }
+
     //The Relation With Category Model.
     public function categories()
     {
-        $this->hasMany('App\Models\Category');
+        return $this->hasMany('App\Models\Category');
     }
 
     //The Relation With Article Model.
     public function articles()
     {
-        $this->hasMany('App\Models\Article');
+        return $this->hasMany('App\Models\Article');
     }
 
     //The Relation With Donation Model.
     public function donations()
     {
-        $this->hasMany('App\Models\Donation');
+        return $this->hasMany('App\Models\Donation');
     }
 
     //The Relation With Job Model.
     public function jobs()
     {
-        $this->hasMany('App\Models\Job');
+        return $this->hasMany('App\Models\Job');
     }
 
     //The Relation With News Model.
     public function news()
     {
-        $this->hasMany('App\Models\News');
+        return $this->hasMany('App\Models\News');
     }
 
     //The Relation With Education Model.
-    public function education()
+    public function educations()
     {
-        $this->hasMany('App\Models\Education');
+        return $this->hasMany('App\Models\Education');
+    }
+
+    //The Relation With Comment Model.
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    //The Relation With Like Model.
+    public function likes()
+    {
+        return $this->hasMany('App\Models\Like');
     }
 }

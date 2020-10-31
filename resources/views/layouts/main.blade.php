@@ -21,6 +21,8 @@
             @if(Session('success')) <p class="flex-center btn btn-success"> {{session('success')}}</p> @endif
 
             @yield('content')
+
+            @yield('comments')
         </div>
     </div>
 

@@ -16,7 +16,7 @@ class Category extends Model
     //The Relation With User Model
     public function user()
     {
-        $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     //The Relation With Article Model

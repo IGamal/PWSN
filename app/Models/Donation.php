@@ -49,4 +49,10 @@ class Donation extends Model
     {
         return $this->belongsTo('App\Models\Governorate');
     }
+
+    //The Relation With Comment Model.
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

@@ -35,7 +35,7 @@
 
     <div class="name">
         <h2>  Name </h2>
-        <p>{{$donation->user->first_name . " " . $donation->user->first_name}}</p>
+        <p>{{$donation->user->fullName()}}</p>
     </div>
 
     <div class="phone">

@@ -41,7 +41,7 @@
 
     <div class="name">
         <h2>  Name </h2>
-        <p>{{$job->user->first_name . " " . $job->user->first_name}}</p>
+        <p>{{$job->user->fullName()}}</p>
     </div>
 
     <div class="phone">

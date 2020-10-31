@@ -12,11 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {return view('welcome');});
-
 Auth::routes();
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('homepage');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Routes for User.
@@ -43,4 +41,16 @@ Route::resource('news','App\Http\Controllers\NewsController');
 Route::resource('educations','App\Http\Controllers\EducationController');
 Route::get('education/videos', [App\Http\Controllers\EducationController::class, 'videos'])->name('videos');
 Route::get('education/books', [App\Http\Controllers\EducationController::class, 'books'])->name('books');
+
+//Routes for Comments.
+Route::resource('comments','App\Http\Controllers\CommentController')->except(['index', 'show', 'edit']);
+
+//Routes for replies.
+Route::resource('replies','App\Http\Controllers\ReplyController')->except(['index', 'show', 'edit']);
+
+//Routes for Likes.
+Route::post('/likeComment/{comment}', 'App\Http\Controllers\LikeController@likeComment');
+Route::post('/dislikeComment/{comment}', 'App\Http\Controllers\LikeController@DislikeComment');
+Route::post('/likeReply/{reply}', 'App\Http\Controllers\LikeController@likeReply');
+Route::post('/dislikeReply/{reply}', 'App\Http\Controllers\LikeController@DislikeReply');
 

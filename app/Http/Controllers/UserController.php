@@ -40,7 +40,7 @@ class UserController extends Controller
 
         Session()->flash('success','user '. $input['first_name'] . ' has been Added successfully');
 
-        return redirect('/home');
+        return redirect('/');
     }
 
     //Display user page
@@ -80,14 +80,14 @@ class UserController extends Controller
 
         $user->update($input); //Update user Information
 
-        return redirect('/home');
+        return redirect('/');
     }
 
     //softDelete user information
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/home');
+        return redirect('/');
     }
 
     //verify user Email Address
@@ -100,7 +100,7 @@ class UserController extends Controller
         $user->email_verified_at = now();
         $user->save();
 
-        return redirect('/home');
+        return redirect('/');
     }
 
     public function resend($token)

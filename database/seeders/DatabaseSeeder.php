@@ -4,11 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Donation;
 use App\Models\Education;
 use App\Models\Governorate;
 use App\Models\Job;
+use App\Models\Like;
 use App\Models\News;
+use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,13 +28,20 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
         User::truncate();
+
         Category::truncate();
         Governorate::truncate();
+
         Article::truncate();
         Donation::truncate();
         Job::truncate();
         News::truncate();
         Education::truncate();
+
+        Comment::truncate();
+        Reply::truncate();
+        Like::truncate();
+
         DB::table('article_category')->truncate();
         DB::table('category_donation')->truncate();
         DB::table('category_job')->truncate();
@@ -40,13 +50,19 @@ class DatabaseSeeder extends Seeder
 
 
         User::flushEventListeners();
+
         Category::flushEventListeners();
         Governorate::flushEventListeners();
+
         Article::flushEventListeners();
         Donation::flushEventListeners();
         Job::flushEventListeners();
         News::flushEventListeners();
         Education::flushEventListeners();
+
+        Comment::flushEventListeners();
+        Reply::flushEventListeners();
+        Like::flushEventListeners();
 
          User::factory(50)->create();
 
@@ -83,5 +99,9 @@ class DatabaseSeeder extends Seeder
                 $categories = Category::all()->random(mt_rand(1,5))->pluck('id');
                 $education->categories()->attach($categories);
             });
+
+        Comment::factory(300)->create();
+        Reply::factory(500)->create();
+        Like::factory(2000)->create();
     }
 }

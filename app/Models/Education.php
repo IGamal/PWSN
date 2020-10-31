@@ -43,4 +43,10 @@ class Education extends Model
     {
         return $this->belongsToMany('App\Models\Category');
     }
+
+    //The Relation With Comment Model.
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

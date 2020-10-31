@@ -11373,3 +11373,27 @@ label {
 
 /*====End Video====*/
 
+.interaction {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.interaction p {
+  vertical-align: middle;
+  margin: 5px;
+}
+
+.interaction button {
+  vertical-align: middle;
+  margin: 10px;
+}
+
+.replies {
+  padding: 10px 0 10px 45px;
+}
+
+.reply {
+  margin: 15px;
+}
+

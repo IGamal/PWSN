@@ -11,8 +11,15 @@ class Governorate extends Model
 
     protected $fillable = ['name'];
 
-    public function donation()
+    //The Relation With Donation Model.
+    public function donations()
     {
-        $this->hasMany('App\Model\Donation');
+        return $this->hasMany('App\Model\Donation');
+    }
+
+    //The Relation With Job Model.
+    public function jobs()
+    {
+        return $this->hasMany('App\Model\Job');
     }
 }
