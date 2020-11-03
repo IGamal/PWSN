@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Add Donation')
+@section('title', 'Donation')
 @section('Background', 'donationBackground')
 
 @section('content')
@@ -14,7 +14,7 @@
 
     <div class="info">
         <h2> Info </h2>
-        <p>{{$donation->Description}}</p>
+        <p>{{$donation->description}}</p>
     </div>
 
     <div class="category">

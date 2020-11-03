@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <img src="images/{{$donation->image}}" class="card-img-top">
                         <p class="card-text">{{$donation->description}}</p>
-                        <a href="/articles/{{$donation->slug}}" lass="btn btn-primary">see more....</a>
+                        <a href="/donations/{{$donation->slug}}" lass="btn btn-primary">see more....</a>
                     </div>
                 </div>
             </div>

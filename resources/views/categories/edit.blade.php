@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Add Category')
+@section('title', 'Edit Category')
 @section('Background', 'CategoryBackground')
 
 @section('content')

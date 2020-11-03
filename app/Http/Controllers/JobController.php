@@ -14,7 +14,7 @@ class JobController extends Controller
     //Display Jobs home.
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = Job::where('approved', Job::Aprroved)->orderBy('id', 'desc')->get();
 
         return view('jobs.index', compact('jobs'));
     }
@@ -39,14 +39,20 @@ class JobController extends Controller
 
         $job->categories()->syncWithoutDetaching($request->category_id); //Add Job and Categories ID's In Category_job Table
 
+        session()->flash("success", "Your Job Offer added successfully and waiting for an Admin approval");
+
         return view('jobs.show', compact('job'));
     }
 
     //Display the specified Job.
     public function show(Job $job)
     {
-        return view('jobs.show', compact('job'));
+        if($job->approved === Job::Aprroved)
+        {
+            return view('jobs.show', compact('job'));
+        }
 
+        return redirect()->back();
     }
 
     //Show the form for editing the specified Donation.
@@ -73,12 +79,17 @@ class JobController extends Controller
 
         $this->validate($request, $rules);
 
-        $job->update($request->all());
+        $input = $request->all();
+        $input['approved'] = Job::UnApproved;
+
+        $job->update($input);
 
         if($request->category_id)
         {
             $job->categories()->sync($request->category_id); //Add Job and Categories ID's In Category_job Table
         }
+
+        session()->flash("success", "Your Job Offer edited successfully and waiting for an Admin approval");
 
         return view('jobs.show', compact('job'));
      }
@@ -89,5 +100,15 @@ class JobController extends Controller
         $job->delete();
 
         return redirect()->route('jobs.index');
+    }
+
+    //update approved column.
+    public function approve(Job $job)
+    {
+        $job->update(['approved' => Job::Aprroved]) ;
+
+        session()->flash("success", "Job Offer approved successfully");
+
+        return redirect()->back();
     }
 }

@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('categories.index', compact('category'));
+        return view('categories.index', compact('categories'));
     }
 
     //Store a newly created category.

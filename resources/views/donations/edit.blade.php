@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Add Donation')
+@section('title', 'Edit Donation')
 @section('Background', 'donationBackground')
 
 @section('content')

@@ -16,6 +16,8 @@
             <div class="">
                 <a class="btn btn-primary" href="categories/{{$category->id}}/edit">Edit</a>
             </div>
+
+            <hr>
         @endforeach
     </div>
 
@@ -28,7 +30,7 @@
             {{Form::label('name', 'Name')}}
             {{-- Check if the field has any errors --}}
             @if($errors->has('name')) <div class="alert alert-danger">{{$errors->first('name') }}</div> @endif
-            {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'categories'])}}
+            {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Type Category Name here...'])}}
         </div>
 
         {{-- Description Field --}}

@@ -14,7 +14,7 @@ class DonationController extends Controller
     //Display Donations home.
     public function index()
     {
-        $donations = Donation::all();
+        $donations = Donation::where('approved', Donation::Aprroved)->orderBy('id', 'desc')->get();
 
         return view('donations.index', compact('donations'));
     }
@@ -48,13 +48,20 @@ class DonationController extends Controller
 
         $donation->categories()->syncWithoutDetaching($request->category_id); //Add Donation and Categories ID's In Category_Donation Table
 
+        session()->flash("success", "Your Donation added successfully and waiting for an Admin approval");
+
         return view('donations.show', compact('donation'));
     }
 
     //Display the specified Donation.
     public function show(Donation $donation)
     {
-        return view('donations.show', compact('donation'));
+        if($donation->approved === Donation::Aprroved)
+        {
+            return view('donations.show', compact('donation'));
+        }
+
+        return redirect()->back();
     }
 
     //Show the form for editing the specified Donation.
@@ -90,12 +97,16 @@ class DonationController extends Controller
             $input['image'] = $name;
         }
 
+        $input['approved'] = Donation::UnApproved;
+
         $donation->update($input);
 
         if($request->category_id)
         {
             $donation->categories()->sync($request->category_id); //Add Donation and Categories ID's In Category_Donation Table
         }
+
+        session()->flash("success", "Your Donation edited successfully and waiting for an Admin approval");
 
         return view('donations.show', compact('donation'));
     }
@@ -106,5 +117,15 @@ class DonationController extends Controller
         $donation->delete();
 
         return redirect()->route('donations.index');
+    }
+
+    //update approved column.
+    public function approve(Donation $donation)
+    {
+        $donation->update(['approved' => Donation::Aprroved]) ;
+
+        session()->flash("success", "Donation approved successfully");
+
+        return redirect()->back();
     }
 }
