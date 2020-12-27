@@ -7,7 +7,9 @@
     <h1>{{$donation->title}}</h1>
 
     @if (auth()->id() === $donation->user_id) {{-- check for user who created that donation --}}
-    <a class="btn btn-primary" href="/donations/{{$donation->slug}}/edit">Edit</a>
+    <a href="/donations/{{$donation->slug}}/edit" ><i class="fa fa-pencil" style='font-size:33px;color:blue'></i></a>
+
+    <a onclick="DeleteDonation({{$donation->id}})"><i class='fas fa-trash-alt' style='font-size:30px;color:red'></i></a>
     @endif
 
     @if($donation->image) <img src="/images/{{$donation->image}}"> @endif {{-- check if that article has an image --}}
@@ -47,5 +49,26 @@
         <h2>  Email </h2>
         <p> {{$donation->user->email}}</p>
     </div>
+
+    <script>
+        function DeleteDonation(id)
+        {
+            let _URl = `/donations/${id}`;
+            let _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: _URl,
+                method: 'Delete',
+                data:{
+                    _token: _token
+                },
+                success: function (response) {
+                    if(response.code == 200)
+                    {
+                        console.log(response)
+                    }
+                }
+            })
+        }
+    </script>
 @endsection
 

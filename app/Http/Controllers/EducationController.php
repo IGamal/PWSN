@@ -73,9 +73,7 @@ class EducationController extends Controller
             return redirect()->back();
         }
 
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        $education = Education::create($input);
+        $education = Auth::user()->educations()->create($input);
 
         $education->categories()->syncWithoutDetaching($request->category_id); //Add Education and Categories ID's In Category_Education Table
 

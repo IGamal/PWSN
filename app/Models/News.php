@@ -10,9 +10,6 @@ class News extends Model
 {
     use HasFactory, SoftDeletes;
 
-    const Aprroved = 'ture';
-    const UnApproved = 'false';
-
     protected static function boot()
     {
         parent::boot();
@@ -29,7 +26,7 @@ class News extends Model
     }
 
     //The attributes that are mass assignable.
-    protected $fillable = ['title', 'slug', 'body', 'image', 'video', 'approved', 'user_id'];
+    protected $fillable = ['title', 'slug', 'body', 'image', 'video', 'user_id'];
     protected $hidden = ['pivot'];
 
     //The Relation With User Model.
@@ -48,5 +45,17 @@ class News extends Model
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
+    }
+
+    //The Relation With Favourite Model.
+    public function favourites()
+    {
+        return $this->hasMany('App\Models\Favourite');
+    }
+
+    //The Relation With Save Model.
+    public function saves()
+    {
+        return $this->hasMany('App\Models\Save');
     }
 }

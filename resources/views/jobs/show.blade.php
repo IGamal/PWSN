@@ -6,8 +6,9 @@
 @section('content')
     <h1>{{$job->title}}</h1>
     @if (auth()->id() === $job->user_id) {{-- check for user who created that job --}}
-        <a class="btn btn-primary" href="/jobs/{{$job->slug}}/edit">Edit</a>
-    @endif
+    <a href="/$jobs/{{$job->slug}}/edit" ><i class="fa fa-pencil" style='font-size:33px;color:blue'></i></a>
+
+    <a onclick="DeleteJob({{$job->id}})"><i class='fas fa-trash-alt' style='font-size:30px;color:red'></i></a>    @endif
 
     <div class="description">
         <h2> Description </h2>
@@ -54,4 +55,24 @@
         <p> {{$job->user->email}}</p>
     </div>
 
+    <script>
+        function DeleteJob(id)
+        {
+            let _URl = `/jobs/${id}`;
+            let _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: _URl,
+                method: 'Delete',
+                data:{
+                    _token: _token
+                },
+                success: function (response) {
+                    if(response.code == 200)
+                    {
+                        console.log(response)
+                    }
+                }
+            })
+        }
+    </script>
 @endsection

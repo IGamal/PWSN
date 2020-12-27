@@ -4,7 +4,7 @@
 @section('Background', 'userBackground')
 
 @section('content')
-    <h1 class="title"> Registation </h1>
+    <h1 class="title"> Edit Your Data </h1>
 
     {!! Form::model($user, ['method' => 'PATCH', "action" => ['App\Http\Controllers\UserController@update', $user->id], 'files' => 'true']) !!}
 

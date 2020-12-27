@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\NewsRequest;
 use App\Models\Category;
 use App\Models\News;
@@ -13,7 +14,7 @@ class NewsController extends Controller
     //Display News home.
     public function index()
     {
-        $newses = News::all();
+        $newses = News::orderBy('id', 'desc')->get();   //get all News.
 
         return view('news.index', compact('newses'));
     }
@@ -49,9 +50,7 @@ class NewsController extends Controller
             $input['video'] = $name;
         }
 
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        $news = News::create($input);
+        $news = Auth::user()->news()->create($input);
 
         $news->categories()->syncWithoutDetaching($request->category_id); //Add Article and Categories ID's In Article_Category Table
 

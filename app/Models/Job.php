@@ -55,5 +55,17 @@ class Job extends Model
     {
         return $this->hasMany('App\Models\Comment');
     }
+
+    //The Relation With Favourite Model.
+    public function favourites()
+    {
+        return $this->hasMany('App\Models\Favourite');
+    }
+
+    //The Relation With Save Model.
+    public function saves()
+    {
+        return $this->hasMany('App\Models\Save');
+    }
 }
 

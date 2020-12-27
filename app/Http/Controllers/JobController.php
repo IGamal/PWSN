@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\JobRequest;
 use App\Models\Category;
 use App\Models\Governorate;
@@ -31,11 +32,7 @@ class JobController extends Controller
     //Store a newly created Job in storage.
     public function store(JobRequest $request)
     {
-        $input = $request->all();
-
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        $job = Job::create($input);
+        $job = Auth::user()->jobs()->create($request->all());
 
         $job->categories()->syncWithoutDetaching($request->category_id); //Add Job and Categories ID's In Category_job Table
 
@@ -95,20 +92,18 @@ class JobController extends Controller
      }
 
     //Remove the specified Job from storage.
-    public function destroy(Job $job)
+    public function destroy($id)
     {
-        $job->delete();
+        Job::findorfail($id)->delete();
 
-        return redirect()->route('jobs.index');
+        return response()->json(['code' => 200, 'success' => "Job Deleted successfully"]);
     }
 
     //update approved column.
-    public function approve(Job $job)
+    public function approve($id)
     {
-        $job->update(['approved' => Job::Aprroved]) ;
+        $job = Job::findorfail($id)->update(['approved' => Job::Aprroved]) ;
 
-        session()->flash("success", "Job Offer approved successfully");
-
-        return redirect()->back();
+        return response()->json(['code' => 200, 'data' => $job, 'success' => "Job approved successfully"]);
     }
 }

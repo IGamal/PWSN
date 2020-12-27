@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'phone'=> $this->faker->e164PhoneNumber,
             'birthday' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-            'image' => $this->faker->imageUrl($width = 640, $height = 480, 'people'),
+            'image' => $this->faker->randomElement(['user1.jpg', 'user2.jpg', 'user3.jpg', 'user4.jpg', 'user5.jpg']),
             'remember_token' => Str::random(10),
             'verified' => $verified = $this->faker->randomElement([ User::VERIFIED_USER, User::UNVERIFIED_USER]),
             'verification_token' => $verified == User::VERIFIED_USER ? null : User::generateVerificationCode(),

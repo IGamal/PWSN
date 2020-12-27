@@ -3,6 +3,9 @@
 @section('content')
     <h1>Jobs</h1>
 
+    <p id="Deleted" class="alert alert-danger" style="display: none"></p>
+    <p id="Approved" class="alert alert-success" style="display: none"></p>
+
     <table class="table">
         <thead>
         <tr>
@@ -26,36 +29,72 @@
 
         <tbody>
         @foreach($jobs as $job)
-            <tr>
-                <th>{{$job->id}}</th>
-                <th>{{$job->user->fullName()}}</th>
-                <th>{{$job->user->id}}</th>
-                <th>{{$job->user->email}}</th>
-                <th>{{$job->title}}</th>
-                <th>{{$job->description}}</th>
-                <th>{{$job->requirements}}</th>
-                <th>{{$job->salary}}</th>
-                <th>{{$job->phone}}</th>
-                <th>{{$job->governorate->name}}</th>
-                <th>
+            <tr id="row_{{$job->id}}">
+                <td>{{$job->id}}</td>
+                <td>{{$job->user->fullName()}}</td>
+                <td>{{$job->user->id}}</td>
+                <td>{{$job->user->email}}</td>
+                <td>{{$job->title}}</td>
+                <td>{{$job->description}}</td>
+                <td>{{$job->requirements}}</td>
+                <td>{{$job->salary}}</td>
+                <td>{{$job->phone}}</td>
+                <td>{{$job->governorate->name}}</td>
+                <td>
                     @foreach($job->categories as $category)
                         <span>{{$category->name}} / </span>
                     @endforeach
-                </th>
-                <th>{{$job->created_at->diffforhumans()}}</th>
-                <th>{{$job->updated_at->diffforhumans()}}</th>
-                <th>
-                    {!! Form::model($job, ['action' =>['App\Http\Controllers\JobController@approve', $job->slug], 'method' => 'POST']) !!}
-                    {!! Form::submit('Approve',['class' => 'btn btn-success']) !!}
-                    {!! Form::close() !!}
-                </th>
-                <th>
-                    {!! Form::model($job, ['method' => 'DELETE', "action" => ['App\Http\Controllers\JobController@destroy', $job->slug]]) !!}
-                    {!!Form::submit('Delete', ['class' => 'btn btn-danger'])!!}
-                    {!! Form::close() !!}
-                </th>
+                </td>
+                <td>{{$job->created_at->diffforhumans()}}</td>
+                <td>{{$job->updated_at->diffforhumans()}}</td>
+                <td><button class="btn btn-success" onclick="ApproveJob({{$job->id}})">Approve</button></td>
+                <td> <button class="btn btn-danger" onclick="DeleteJob({{$job->id}})">Delete</button></td>
             </tr>
         @endforeach
         </tbody>
     </table>
+
+    <script>
+        function ApproveJob(id)
+        {
+            let _URl = `/jobs/approve/${id}`;
+            let _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: _URl,
+                method: 'Post',
+                data:{
+                    _token: _token
+                },
+                success: function (response) {
+                    if(response.code == 200)
+                    {
+                        $('#Approved').show();
+                        $('#Approved').text(response.success);
+                        $("#row_"+id).remove();
+                    }
+                }
+            });
+        }
+
+        function DeleteJob(id)
+        {
+            let _URl = `/jobs/${id}`;
+            let _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: _URl,
+                method: 'Delete',
+                data:{
+                    _token: _token
+                },
+                success: function (response) {
+                    if(response.code == 200)
+                    {
+                        $('#Deleted').show();
+                        $('#Deleted').text(response.success);
+                        $('#row_'+id).remove();
+                    }
+                }
+            })
+        }
+    </script>
 @endsection

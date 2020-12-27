@@ -27,11 +27,7 @@ class CategoryController extends Controller
 
         $this->validate($request, $rules); //Validate user input
 
-        $input = $request->all();
-
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        Category::create($input);
+        auth::user()->categories()->create($request->all());
 
         return redirect()->route('categories.index');
     }

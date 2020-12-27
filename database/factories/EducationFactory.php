@@ -29,6 +29,7 @@ class EducationFactory extends Factory
             'slug' => str_slug($title),
             'body' => $this->faker->paragraph(1),
             'approved' => $approved = $this->faker->randomElement([Education::Aprroved, Education::UnApproved]),
+
             'user_id' => function() { return User::all()->random()->id; }
         ];
     }

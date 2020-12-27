@@ -29,8 +29,7 @@ class ArticleFactory extends Factory
             'title' => $title,
             'slug' => str_slug($title),
             'body' => $this->faker->paragraph(1),
-            'image' => $this->faker->imageUrl($width = 640, $height = 480, 'abstract'),
-            'approved' => $approved = $this->faker->randomElement([Article::Aprroved, Article::UnApproved]),
+            'image' => $this->faker->randomElement(['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg']),
             'user_id' => function() { return User::all()->random()->id; }
         ];
     }

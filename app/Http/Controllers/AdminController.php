@@ -34,7 +34,7 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($request->id);
 
-        return view('admin.Users', compact('user'));
+        return response()->json(['code' => 200, 'data' => $user]);
     }
 
     //Add new admin.
@@ -42,21 +42,16 @@ class AdminController extends Controller
     {
         if ($user->isAdmin())  //check if the user is already an admin.
         {
-            session()->flash("error", "User is already an Admin");
-
-            return redirect()->route('adminPanel_users');
+            return response()->json(['code' => 201, 'error' => "User is already an Admin"]);
         }
         if($user->isVerified()) //check if user verified his email or not
         {
             $user->update(['admin' => User::ADMIN_USER]);
 
-            session()->flash("success", "User added to Admins successfully");
-
-            return redirect()->route('adminPanel_users');
+            return response()->json(['code' => 200, 'data' => $user, 'success' => "User added to Admins successfully"]);
         }
-        session()->flash("error", 'User need to verify his Email first to become an Admin');
 
-        return redirect()->route('adminPanel_users');
+        return response()->json(['code' => 201, 'error' => "User need to verify his Email first to become an Admin"]);
     }
 
     //show form to approve donations.

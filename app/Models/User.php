@@ -113,9 +113,27 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Comment');
     }
 
+    //The Relation With Reply Model.
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
+    }
+
     //The Relation With Like Model.
     public function likes()
     {
         return $this->hasMany('App\Models\Like');
+    }
+
+    //The Relation With Favourite Model.
+    public function favourites()
+    {
+        return $this->hasMany('App\Models\Favourite');
+    }
+
+    //The Relation With Save Model.
+    public function saves()
+    {
+        return $this->hasMany('App\Models\Save');
     }
 }

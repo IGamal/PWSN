@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\DonationRequest;
 use App\Models\Category;
 use App\Models\Donation;
@@ -42,9 +43,7 @@ class DonationController extends Controller
             $input['image'] = $name;
         }
 
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        $donation = Donation::create($input);
+        $donation = Auth::user()->donations()->create($input);
 
         $donation->categories()->syncWithoutDetaching($request->category_id); //Add Donation and Categories ID's In Category_Donation Table
 
@@ -112,20 +111,18 @@ class DonationController extends Controller
     }
 
     //Remove the specified Donation from storage.
-    public function destroy(Donation $donation)
+    public function destroy($id)
     {
-        $donation->delete();
+        Donation::findorfail($id)->delete();
 
-        return redirect()->route('donations.index');
+        return response()->json(['code' => 200, 'success' => "Donation Deleted successfully"]);
     }
 
     //update approved column.
-    public function approve(Donation $donation)
+    public function approve($id)
     {
-        $donation->update(['approved' => Donation::Aprroved]) ;
+        $donation = Donation::findorfail($id)->update(['approved' => Donation::Aprroved]) ;
 
-        session()->flash("success", "Donation approved successfully");
-
-        return redirect()->back();
+        return response()->json(['code' => 200, 'data' => $donation, 'success' => "Donation approved successfully"]);
     }
 }

@@ -17,10 +17,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $donations = Donation::latest("ID")->limit(5)->get();
         $articles = Article::latest("ID")->limit(5)->get();
+        $donations = Donation::where('approved', Donation::Aprroved)->orderBy('id', 'desc')->limit(5)->get();
         $newses = News::latest("ID")->limit(5)->get();
-        $jobs = Job::latest("ID")->limit(5)->get();
+        $jobs = Job::where('approved', Job::Aprroved)->orderBy('id', 'desc')->limit(5)->get();
         return view('home', compact('articles', 'newses', 'donations', 'jobs'));
     }
 }

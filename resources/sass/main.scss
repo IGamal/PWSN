@@ -1,8 +1,4 @@
-@font-face
-{
-    src: url(//fonts/MYRIADPRO-REGULAR.OTF);
-    font-family: Myriad;
-}
+
 $user-color: #4285F4;
 *
 {
@@ -13,7 +9,6 @@ $user-color: #4285F4;
     -moz-appearance: none;
     box-sizing: border-box;
     outline: none;
-    font-family: Myriad;
 }
 .userBackground
 {
@@ -156,4 +151,38 @@ label
 
 .reply{
     margin: 15px;
+}
+
+.favourite{
+    font-size:36px;
+    background-color: white;
+    color:red;
+}
+
+.unfavourite{
+    font-size:36px;
+    background-color: white;
+    color:lightgray;
+}
+
+.like{
+    font-size:20px;
+    background-color: white;
+    color:blue;
+}
+.unlike{
+    font-size:20px;
+    background-color: white;
+    color:lightgray;
+}
+
+.dislike{
+    font-size:20px;
+    background-color: white;
+    color:red;
+}
+.undislike{
+    font-size:20px;
+    background-color: white;
+    color:lightgray;
 }

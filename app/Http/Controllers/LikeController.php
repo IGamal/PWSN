@@ -18,12 +18,12 @@ class LikeController extends Controller
             if($like->like === 1)
             {
                 $like->delete();           //if user already liked this comment the like will be deleted.
-                return redirect()->back();
+                return response()->json(['code'=>201]);
             }
             if($like->like === 0)
             {
                 $like->update(['like' => 1]) ;  //if user already disliked this comment it will convert to like.
-                return redirect()->back();
+                return response()->json(['code'=>202]);
             }
         }
         else //if user didnt liked or disliked this comment a new like will be added to this comment
@@ -33,7 +33,7 @@ class LikeController extends Controller
                 'comment_id' => $comment_id,
                 'like' => 1
             ]);
-            return redirect()->back();
+            return response()->json(['code'=>200]);
         }
     }
 
@@ -46,12 +46,12 @@ class LikeController extends Controller
             if($like->like === 0)
             {
                 $like->delete();          //if user already disliked this comment the dislike will be deleted.
-                return redirect()->back();
+                return response()->json(['code'=>401]);
             }
             if($like->like === 1)
             {
                 $like->update(['like' => 0]) ;  //if user already liked this comment it will convert to dislike.
-                return redirect()->back();
+                return response()->json(['code'=>402]);
             }
         }
         else //if user didnt liked or disliked this comment a new dislike will be added to this comment
@@ -61,7 +61,7 @@ class LikeController extends Controller
                 'comment_id' => $comment_id,
                 'like' => 0
             ]);
-            return redirect()->back();
+            return response()->json(['code'=>400]);
         }
     }
 
@@ -74,12 +74,12 @@ class LikeController extends Controller
             if($like->like === 1)
             {
                 $like->delete();           //if user already liked this reply the like will be deleted.
-                return redirect()->back();
+                return response()->json(['code'=>201]);
             }
             if($like->like === 0)
             {
                 $like->update(['like' => 1]) ;  //if user already disliked this reply it will convert to like.
-                return redirect()->back();
+                return response()->json(['code'=>202]);
             }
         }
         else //if user didnt liked or disliked this reply a new like will be added to this reply
@@ -89,7 +89,7 @@ class LikeController extends Controller
                 'reply_id' => $reply_id,
                 'like' => 1
             ]);
-            return redirect()->back();
+            return response()->json(['code'=>200]);
         }
     }
 
@@ -102,12 +102,12 @@ class LikeController extends Controller
             if($like->like === 0)
             {
                 $like->delete();          //if user already disliked this reply the dislike will be deleted.
-                return redirect()->back();
+                return response()->json(['code'=>401]);
             }
             if($like->like === 1)
             {
                 $like->update(['like' => 0]) ;  //if user already liked this reply it will convert to dislike.
-                return redirect()->back();
+                return response()->json(['code'=>402]);
             }
         }
         else //if user didnt liked or disliked this reply a new dislike will be added to this reply
@@ -117,7 +117,7 @@ class LikeController extends Controller
                 'reply_id' => $reply_id,
                 'like' => 0
             ]);
-            return redirect()->back();
+            return response()->json(['code'=>400]);
         }
     }
 }

@@ -21,6 +21,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('users','App\Http\Controllers\UserController')->except(['index']);
 Route::get('users/verify/{token}', [App\Http\Controllers\UserController::class, 'verify'])->name('verify');
 Route::get('users/{user}/resend', [App\Http\Controllers\UserController::class, 'resend'])->name('resend');
+Route::get('user/favourites', [App\Http\Controllers\UserController::class, 'favourite'])->name('user_favourite');
+Route::get('user/saves', [App\Http\Controllers\UserController::class, 'save'])->name('user_save');
+
 
 //Routes for Admin Panel
 Route::get('adminPanel', 'App\Http\Controllers\AdminController@index')->name('adminPanel');
@@ -29,7 +32,7 @@ Route::get('adminPanel/jobs', 'App\Http\Controllers\AdminController@jobs')->name
 Route::get('adminPanel/admins', 'App\Http\Controllers\AdminController@admins')->name('adminPanel_admins');
 Route::get('adminPanel/users', 'App\Http\Controllers\AdminController@users')->name('adminPanel_users');
 Route::post('adminPanel/user', 'App\Http\Controllers\AdminController@getUser');
-Route::post('adminPanel/makradmin/{user}', 'App\Http\Controllers\AdminController@makeadmin');
+Route::post('adminPanel/makeadmin/{user}', 'App\Http\Controllers\AdminController@makeadmin');
 
 
 //Routes for Category.
@@ -52,7 +55,7 @@ Route::post('/jobs/approve/{job}', 'App\Http\Controllers\JobController@approve')
 Route::resource('news','App\Http\Controllers\NewsController');
 
 //Routes for Education.
-Route::resource('educations','App\Http\Controllers\EducationController');
+Route::resource('educations','App\Http\Controllers\EducationController')->except('index');
 Route::get('education/videos', [App\Http\Controllers\EducationController::class, 'videos'])->name('videos');
 Route::get('education/books', [App\Http\Controllers\EducationController::class, 'books'])->name('books');
 
@@ -67,4 +70,16 @@ Route::post('/likeComment/{comment}', 'App\Http\Controllers\LikeController@likeC
 Route::post('/dislikeComment/{comment}', 'App\Http\Controllers\LikeController@DislikeComment');
 Route::post('/likeReply/{reply}', 'App\Http\Controllers\LikeController@likeReply');
 Route::post('/dislikeReply/{reply}', 'App\Http\Controllers\LikeController@DislikeReply');
+
+//Routes for favourites.
+Route::post('/favourites','App\Http\Controllers\FavouriteController@favourite');
+//Route::post('/favourites/{user}','App\Http\Controllers\FavouriteController@favourite');
+Route::post('/favourites/{model}','App\Http\Controllers\FavouriteController@getfavourite');
+
+//Routes for saves.
+Route::post('/saves/{mode}/{id}','App\Http\Controllers\SaveController@save');
+Route::post('/saves/{model}','App\Http\Controllers\SaveController@getsaved');
+
+
+
 

@@ -21,7 +21,6 @@ class CreateNewsTable extends Migration
             $table->text('body');
             $table->string('image');
             $table->string('video')->nullable();
-            $table->string('approved')->default(News::UnApproved);
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();

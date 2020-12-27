@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
@@ -13,7 +14,7 @@ class ArticleController extends Controller
     //Display Articles home.
     public function index()
     {
-        $articles = Article::all(); //get all Articles.
+        $articles = Article::orderBy('id', 'desc')->get(); //get all Articles.
 
         return view('articles.index', compact('articles'));
     }
@@ -49,9 +50,7 @@ class ArticleController extends Controller
             $input['video'] = $name;
         }
 
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        $article = Article::create($input);
+        $article = auth::user()->articles()->create($input);
 
         $article->categories()->syncWithoutDetaching($request->category_id); //Add Article and Categories ID's In Article_Category Table
 

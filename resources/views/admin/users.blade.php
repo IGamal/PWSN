@@ -1,69 +1,134 @@
 @extends('layouts.adminPanel')
 
 @section('content')
-    @if($errors->has('erroro')) <div class="alert alert-danger">{{$errors->first('erroro') }}</div> @endif
+    <form name="UerID" class="form-horizontal">
 
-    {!! Form::open(['action' => 'App\Http\Controllers\AdminController@getUser', 'method' => 'POST']) !!}
+        <p id="Error" class="alert alert-danger" style="display: none"></p>
+        <p id="Success" class="alert alert-success" style="display: none"></p>
 
         {{-- User ID Field --}}
         <div class="form-group">
             {!!Form::label('User ID', 'User ID')!!}
             {{-- Check if the field has any errors --}}
-            @if($errors->has('id')) <div class="alert alert-danger">{{$errors->first('id') }}</div> @endif
-            {!!Form::text('id', '', ['class' => 'form-control', 'placeholder' => 'insert User ID here...'])!!}
+            <span id="UserIdError" class="alert-message"></span>
+            <input type="text" class="form-control" id="userid" name="id" placeholder='insert User ID here...'>
         </div>
 
-        <div>
-            {{Form::submit('Get', ['class' => 'btn btn-primary'])}}
-        </div>
-    {!! Form::close() !!}
+        <div> <button type="button" class="btn btn-primary" onClick="GetUser()">Get</button> </div>
+    </form>
 
-    @if(isset($user))
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Email Verified at</th>
-                <th>Image</th>
-                <th>Phone Number</th>
-                <th>Birthday</th>
-                <th>Verified</th>
-                <th>Admin</th>
-                <th>Created at</th>
-                <th>updated at</th>
-                <th>Make Admin</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
+    <div id ="table"></div>
 
-            <tbody>
-                <tr>
-                    <th>{{$user->id}}</th>
-                    <th>{{$user->fullName()}}</th>
-                    <th>{{$user->email}}</th>
-                    <th>{{$user->email_verified_at}}</th>
-                    <th><img height= '50' src="{{$user->image}}"></th>
-                    <th>{{$user->phone}}</th>
-                    <th>{{$user->birthday}}</th>
-                    <th>{{$user->verified}}</th>
-                    <th>{{$user->admin}}</th>
-                    <th>{{$user->created_at->diffforhumans()}}</th>
-                    <th>{{$user->updated_at->diffforhumans()}}</th>
-                    <th>
-                        {!! Form::model($user, ['method' => 'POST', 'action' =>['App\Http\Controllers\AdminController@makeadmin', $user->id], 'onsubmit' => 'return confirm("Are You sure You Want To Make this User an ADMIN")']) !!}
-                        {!! Form::submit('Make Admin',['class' => 'btn btn-success']) !!}
-                        {!! Form::close() !!}
-                    </th>
-                    <th>
-                        {!! Form::model($user, ['method' => 'DELETE', "action" => ['App\Http\Controllers\UserController@destroy', $user->id], 'onsubmit' => 'return confirm("Are You sure You Want To Delete This User")']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-                    </th>
-                </tr>
-            </tbody>
-        </table>
-    @endif
+    <script>
+        function GetUser()
+        {
+            var id = $('#userid').val();
+            let _url = '/adminPanel/user';
+            let _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: _url,
+                method: 'Post',
+                data: {
+                    id: id,
+                    _token: _token
+                },
+                success: function(response){
+                    if(response.code == 200)
+                    {
+                        $('#table').prepend('' +
+                        '<table> ' +
+                            '<thead> ' +
+                                '<tr> ' +
+                                    '<th>Id</th> ' +
+                                    '<th>Name</th> ' +
+                                    '<th>Email</th> ' +
+                                    '<th>Email Verified at</th> ' +
+                                    '<th>Image</th>' +
+                                    '<th>Phone Number</th>' +
+                                    '<th>Birthday</th>' +
+                                    '<th>Verified</th>' +
+                                    '<th>Admin</th>' +
+                                    '<th>Created at</th>' +
+                                    '<th>updated at</th>' +
+                                    '<th>Make Admin</th>' +
+                                    '<th>Delete</th>' +
+                                '</tr>' +
+                            '</thead>' +
+                            '<tbody>' +
+                                '<tr id="row">' +
+                                    '<td>'+response.data.id+'</td>' +
+                                    '<td>'+response.data.first_name +' '+ response.data.last_name+'</td>' +
+                                    '<td>'+response.data.email+'</td>' +
+                                    '<td>'+response.data.email_verified_at+'</td>' +
+                                    '<td><img height= "50" src="/images/'+response.data.image+'"></td>' +
+                                    '<td>'+response.data.phone+'</td>' +
+                                    '<td>'+response.data.birthday+'</td>' +
+                                    '<td>'+response.data.verified+'</td>' +
+                                    '<td>'+response.data.admin+'</td>' +
+                                    '<td>'+response.data.created_at+'</td>' +
+                                    '<td>'+response.data.updated_at+'</td>' +
+                                    '<td><a class="btn btn-success" onClick="MakeAdmin('+response.data.id+')">Make Admin</a></td>' +
+                                    '<td><a class="btn btn-success" onClick="DeleteUser('+response.data.id+')">Delete</a></td> ' +
+                                '</tr>' +
+                            '</tbody>' +
+                        '</table>');
+
+                        $('#userid').val('');
+                    }
+                },
+                error: function(response)
+                {
+                    $('#UserIdError').text(response.responseJSON.errors.id);
+                }
+            });
+        }
+
+        function MakeAdmin(id)
+        {
+            let _url = `/adminPanel/makeadmin/${id}`;
+            let _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: _url,
+                method: 'Post',
+                data: {
+                    _token: _token
+                },
+                success: function(response) {
+                    if(response.code == 200)
+                    {
+                        $('#Success').show();
+                        $('#Success').text(response.success);
+                    }
+                    if(response.code == 201)
+                    {
+                        $('#Message').text(response.error);
+
+                        $('#Error').show();
+                        $('#Error').text(response.error);
+                    }
+                }
+            });
+        }
+
+        function DeleteUser(id)
+        {
+            let _url = `/users/${id}`;
+            let _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: _url,
+                method: 'Delete',
+                data: {
+                    _token: _token
+                },
+                success: function(response) {
+                    if(response.code == 200)
+                    {
+                        $('#Success').show();
+                        $('#Success').text(response.success);
+                    }
+                }
+            });
+        }
+    </script>
 
 @endsection

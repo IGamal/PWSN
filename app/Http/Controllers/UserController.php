@@ -44,15 +44,14 @@ class UserController extends Controller
     }
 
     //Display user page
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.home', compact('user'));
     }
 
     //Show the form for editing user information.
      public function edit(User $user)
     {
-
         return view('users.edit', compact('user'));
     }
 
@@ -87,7 +86,18 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/');
+
+        return response()->json(['code' => 200, 'success' => "User Deleted Successfully"]);
+    }
+
+    public function favourite()
+    {
+        return view('users.favourite');
+    }
+
+    public function save()
+    {
+        return view('users.save');
     }
 
     //verify user Email Address
@@ -107,4 +117,5 @@ class UserController extends Controller
     {
         return $token;
     }
+
 }

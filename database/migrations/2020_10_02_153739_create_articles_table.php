@@ -21,7 +21,6 @@ class CreateArticlesTable extends Migration
             $table->text('body');
             $table->string('image')->nullable();
             $table->string('video')->nullable();
-            $table->string('approved')->default(Article::UnApproved);
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();

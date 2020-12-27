@@ -13,13 +13,9 @@ class ReplyController extends Controller
     {
         request()->validate(['body' => 'required|min:2|max:255']);//Validate user input
 
-        $input = $request->all();
+        $reply = Auth::user()->replies()->create($request->all());
 
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        Reply::create($input);
-
-        return redirect()->back();
+        return response()->json(['code'=>200,'data' => $reply], 200);
     }
 
     //Show the form for editing reply.
@@ -34,7 +30,7 @@ class ReplyController extends Controller
 
         $reply->update($request->all());
 
-        return redirect()->back();
+        return response()->json(['code'=>200,'data' => $reply], 200);
     }
 
     //Remove the specified reply from storage.
@@ -42,6 +38,6 @@ class ReplyController extends Controller
     {
         $reply->delete();
 
-        return redirect()->back();
+        return response()->json(['code'=>200]);
     }
 }

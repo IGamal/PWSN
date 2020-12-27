@@ -29,6 +29,7 @@ class DonationFactory extends Factory
             'title' => $title,
             'slug' => str_slug($title),
             'image' => $this->faker->imageUrl($width = 640, $height = 480, 'abstract'),
+            'image' => $this->faker->randomElement(['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg']),
             'description' => $this->faker->paragraph(1),
             'phone'=> $this->faker->e164PhoneNumber,
             'approved' => $approved = $this->faker->randomElement([Donation::Aprroved, Donation::UnApproved]),

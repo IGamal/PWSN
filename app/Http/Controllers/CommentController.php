@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(Authenticate::class)->except(['index','show']);
+    }
+
     //Store a newly created comment.
     public function store(Request $request)
     {
         request()->validate(['body' => 'required|min:2|max:255']);//Validate user input
 
-        $input = $request->all();
+        $comment = Auth::user()->comments()->create($request->all());
 
-        $input['user_id'] = Auth::id(); //Add user Id
-
-        Comment::create($input);
-
-        return redirect()->back();
+        return response()->json(['code'=>200,'data' => $comment], 200);
     }
 
     //Update the specified Comment.
@@ -29,7 +31,7 @@ class CommentController extends Controller
 
         $comment->update($request->all());
 
-        return redirect()->back();
+        return response()->json(['code'=>200,'data' => $comment], 200);
     }
 
     //Remove the specified Comment from storage.
@@ -37,6 +39,6 @@ class CommentController extends Controller
     {
         $comment->delete();
 
-        return redirect()->back();
+        return response()->json(['code'=>200]);
     }
 }

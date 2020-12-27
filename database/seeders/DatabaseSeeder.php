@@ -7,11 +7,13 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Donation;
 use App\Models\Education;
+use App\Models\Favourite;
 use App\Models\Governorate;
 use App\Models\Job;
 use App\Models\Like;
 use App\Models\News;
 use App\Models\Reply;
+use App\Models\Save;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +43,8 @@ class DatabaseSeeder extends Seeder
         Comment::truncate();
         Reply::truncate();
         Like::truncate();
+        Favourite::truncate();
+        Save::truncate();
 
         DB::table('article_category')->truncate();
         DB::table('category_donation')->truncate();
@@ -63,8 +67,10 @@ class DatabaseSeeder extends Seeder
         Comment::flushEventListeners();
         Reply::flushEventListeners();
         Like::flushEventListeners();
+        Favourite::flushEventListeners();
+        Save::flushEventListeners();
 
-         User::factory(50)->create();
+        User::factory(50)->create();
 
          Category::factory(15)->create();
          $this->call(GovernorateSeeder::class);
@@ -100,8 +106,11 @@ class DatabaseSeeder extends Seeder
                 $education->categories()->attach($categories);
             });
 
-        Comment::factory(300)->create();
-        Reply::factory(500)->create();
-        Like::factory(2000)->create();
+        Comment::factory(600)->create();
+        Reply::factory(1000)->create();
+        Like::factory(5000)->create();
+
+        Favourite::factory(1000)->create();
+        Save::factory(1000)->create();
     }
 }

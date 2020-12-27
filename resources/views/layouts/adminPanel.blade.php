@@ -13,6 +13,20 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        table, th, td
+        {
+            margin: 25px;
+            padding: 7px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th
+        {
+            border: 1px black;
+            background-color: lightgrey;
+        }
+    </style>
 <body>
     @include('includes.navbar')
 
